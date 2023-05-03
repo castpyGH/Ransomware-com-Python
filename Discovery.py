@@ -1,4 +1,3 @@
-#!/usr/bin/python3.11
 import os
 
 #Função responsável por descobrir os arquivos do sistema.
